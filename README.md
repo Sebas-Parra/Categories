@@ -64,3 +64,18 @@ COPY --from=builder /app/target/categories-0.0.1-SNAPSHOT.jar app.jar
 
 EXPOSE 8080
 ENTRYPOINT ["java", "-jar", "app.jar"]
+```
+## Construcción de la imagen y al Docker hub
+```bash
+docker build -t sebraxter/img-categories:v1 .
+docker login
+docker push sebraxter/img-categories:v1
+```
+## Base de datos
+```bash
+docker run --name mysql-categories \
+  -e MYSQL_ROOT_PASSWORD=admin123 \
+  -e MYSQL_DATABASE=test \
+  -p 3306:3306 \
+  -d mysql:8
+```
